@@ -6,6 +6,7 @@ import com.microsoft.playwright.junit.OptionsFactory;
 import com.microsoft.playwright.junit.UsePlaywright;
 
 @UsePlaywright(BaseTest.CustomOptions.class)
+@SuppressWarnings("java:S2187")
 public class BaseTest {
 
     public static class CustomOptions implements OptionsFactory {
@@ -15,7 +16,7 @@ public class BaseTest {
                     .setHeadless(false)
                     .setContextOptions(
                             new Browser.NewContextOptions()
-                                    .setBaseURL("https://new.aldi.us/")
+                                    .setBaseURL("https://practicetestautomation.com")
                                     .setViewportSize(1920, 1080)
                     );
         }
