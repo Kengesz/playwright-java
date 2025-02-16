@@ -1,7 +1,6 @@
 package com.example.playwrightjava.tests;
 
 
-import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,11 +13,11 @@ import java.util.stream.Stream;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-class LoginTests extends BaseTest {
+class LoginTests extends PlaywrightTestBase {
 
     @Test
     @DisplayName("Login with valid credentials")
-    void loginWithValidCredentials(Page page) {
+    void loginWithValidCredentials() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
         LoggedInPage loggedInPage = loginPage.doLogin("student", "Password123");
@@ -39,7 +38,7 @@ class LoginTests extends BaseTest {
     @ParameterizedTest
     @MethodSource("invalidUsers")
     @DisplayName("Login with invalid credentials")
-    void loginWithInvalidCredentials(String username, String password, String errorMessage, Page page) {
+    void loginWithInvalidCredentials(String username, String password, String errorMessage) {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
         loginPage.doLogin(username, password);
