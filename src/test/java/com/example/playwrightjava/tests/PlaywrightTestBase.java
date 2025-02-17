@@ -48,6 +48,10 @@ public class PlaywrightTestBase {
                 new Browser.NewContextOptions()
                         .setBaseURL(config.getBaseUrl())
                         .setViewportSize(config.getViewportWidth(), config.getViewportHeight()));
+        context.tracing().start(new Tracing.StartOptions()
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
         page = context.newPage();
     }
 
@@ -63,10 +67,13 @@ public class PlaywrightTestBase {
             Path timestampedDir = Paths.get("attachments", timeStamp);
             timestampedDir.toFile().mkdirs();
 
-            String screenshotName = extensionContext.getDisplayName().replace(" ", "").toLowerCase() + ".png";
-            Path screenshotPath = timestampedDir.resolve(screenshotName);
+            String attachmentName = extensionContext.getDisplayName().replace(" ", "").toLowerCase();
 
+            Path screenshotPath = timestampedDir.resolve(attachmentName + ".png");
             ScreenshotUtil.takeScreenshot(page, screenshotPath);
+
+            Path tracePath = timestampedDir.resolve(attachmentName + ".zip");
+            context.tracing().stop(new Tracing.StopOptions().setPath(tracePath));
         });
     };
 }
