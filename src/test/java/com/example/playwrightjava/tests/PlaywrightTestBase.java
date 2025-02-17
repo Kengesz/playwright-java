@@ -4,6 +4,7 @@ import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import utils.PlaywrightConfig;
 import utils.ScreenshotUtil;
 
 import java.nio.file.Path;
@@ -15,18 +16,25 @@ public class PlaywrightTestBase {
     static Playwright playwright;
     static Browser browser;
     static String timeStamp;
+    static PlaywrightConfig config;
 
     BrowserContext context;
     Page page;
 
     @BeforeAll
     static void beforeAll() {
+        config = PlaywrightConfig.loadConfig("playwrightConfig.json");
         timeStamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions()
-                        .setHeadless(false)
-                        .setSlowMo(150));
+        BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions()
+                .setHeadless(config.isHeadless())
+                .setSlowMo(config.getSlowmo());
+        switch (config.getBrowserType()) {
+            case "firefox" -> browser = playwright.firefox().launch(launchOptions);
+            case "webkit" -> browser = playwright.webkit().launch(launchOptions);
+            default -> browser = playwright.chromium().launch(launchOptions);
+        }
+
     }
 
     @AfterAll
@@ -38,8 +46,8 @@ public class PlaywrightTestBase {
     void beforeEach() {
         context = browser.newContext(
                 new Browser.NewContextOptions()
-                        .setBaseURL("https://practicetestautomation.com")
-                        .setViewportSize(1920, 1080));
+                        .setBaseURL(config.getBaseUrl())
+                        .setViewportSize(config.getViewportWidth(), config.getViewportHeight()));
         page = context.newPage();
     }
 
