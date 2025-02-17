@@ -28,17 +28,16 @@ class LoginTests extends PlaywrightTestBase {
 
     private static Stream<Arguments> invalidUsers() {
         return Stream.of(
-                Arguments.of("student", "wrongPassword", "Your password is invalid!"),
-                Arguments.of("wrongUsername", "Password123", "Your username is invalid!"),
-                Arguments.of("wrongUsername", "wrongPassword", "Your username is invalid!"),
-                Arguments.of("student", "wrongPassword", "Intentionally wrong error message")
+                Arguments.of("Login with invalid password", "student", "wrongPassword", "Your password is invalid!"),
+                Arguments.of("Login with invalid username","wrongUsername", "Password123", "Your username is invalid!"),
+                Arguments.of("Login with invalid username and password","wrongUsername", "wrongPassword", "Your username is invalid!"),
+                Arguments.of("Intentionally wrong test","student", "wrongPassword", "Intentionally wrong error message")
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}")
     @MethodSource("invalidUsers")
-    @DisplayName("Login with invalid credentials")
-    void loginWithInvalidCredentials(String username, String password, String errorMessage) {
+    void loginWithInvalidCredentials(String testName, String username, String password, String errorMessage) {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
         loginPage.doLogin(username, password);
