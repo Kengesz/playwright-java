@@ -1,4 +1,5 @@
 /.idea/
+/attachments/
 
 target/
 pom.xml.tag

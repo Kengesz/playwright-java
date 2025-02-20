@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://practicetestautomation.com",
+  "browserType": "chromium",
+  "headless": true,
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "slowmo" : 0
+}
