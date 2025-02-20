@@ -1,4 +1,4 @@
-package utils;
+package com.example.playwrightjava.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

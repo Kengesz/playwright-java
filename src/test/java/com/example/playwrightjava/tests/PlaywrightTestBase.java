@@ -4,8 +4,8 @@ import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import utils.PlaywrightConfig;
-import utils.ScreenshotUtil;
+import com.example.playwrightjava.utils.PlaywrightConfig;
+import com.example.playwrightjava.utils.ScreenshotUtil;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

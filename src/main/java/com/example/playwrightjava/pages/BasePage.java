@@ -1,4 +1,4 @@
-package pages;
+package com.example.playwrightjava.pages;
 
 import com.microsoft.playwright.Page;
 

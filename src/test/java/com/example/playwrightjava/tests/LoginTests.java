@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import pages.LoggedInPage;
-import pages.LoginPage;
+import com.example.playwrightjava.pages.LoggedInPage;
+import com.example.playwrightjava.pages.LoginPage;
 
 import java.util.stream.Stream;
 
