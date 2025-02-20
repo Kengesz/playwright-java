@@ -2,6 +2,8 @@
 
 This is a simple example of using Playwright with JUnit 5 and Maven.
 
+Note: Developed and tested on Windows 11
+
 ## Getting started
 
 1. Create a copy of playwrightConfig-sample.json and rename it to playwrightConfig.json
